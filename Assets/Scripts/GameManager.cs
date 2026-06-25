@@ -33,7 +33,17 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        timeLeft = gameDuration;
+        if (GameOptions.Instance != null)
+        {
+            scoreToWin = GameOptions.Instance.scoreToWin;
+            gameDuration = GameOptions.Instance.roundDuration;
+            timeLeft = gameDuration;
+        }
+        else
+        {
+            timeLeft = gameDuration;
+        }
+
         endGamePanel.SetActive(false);
         UpdateUI();
     }

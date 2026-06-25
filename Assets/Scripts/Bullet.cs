@@ -37,9 +37,25 @@ public class Bullet : MonoBehaviour
     {
         direction = dir.normalized;
         ownerPlayerNumber = owner;
+
+        if (GameOptions.Instance != null)
+        {
+            switch (bulletType)
+            {
+                case BulletType.Explosive:
+                    explosionRadius = GameOptions.Instance.explosiveRadius;
+                    break;
+                case BulletType.Ricochet:
+                    maxBounces = GameOptions.Instance.ricochetBounces;
+                    break;
+                case BulletType.Tracker:
+                    homingStrength = GameOptions.Instance.trackerHomingStrength;
+                    break;
+            }
+        }
+
         Destroy(gameObject, lifetime);
 
-        // Obróć sprite w kierunku lotu od razu na starcie
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
     }

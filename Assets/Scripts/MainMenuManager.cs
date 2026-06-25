@@ -7,6 +7,8 @@ public class MainMenuManager : MonoBehaviour
     public GameObject mainPanel;
     public GameObject modePanel;
     public GameObject bulletSelectPanel;
+    public GameObject optionsPanel;
+
 
     [Header("Bullet Select - referencje")]
     public BulletSelectScreen bulletSelectScreen;
@@ -20,11 +22,19 @@ public class MainMenuManager : MonoBehaviour
         ShowMainPanel();
     }
 
+    public void ShowOptionsPanel()
+    {
+        mainPanel.SetActive(false);
+        modePanel.SetActive(false);
+        bulletSelectPanel.SetActive(false);
+        optionsPanel.SetActive(true);
+    }
     public void ShowMainPanel()
     {
         mainPanel.SetActive(true);
         modePanel.SetActive(false);
         bulletSelectPanel.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
     public void ShowModePanel()
@@ -32,6 +42,7 @@ public class MainMenuManager : MonoBehaviour
         mainPanel.SetActive(false);
         modePanel.SetActive(true);
         bulletSelectPanel.SetActive(false);
+        optionsPanel.SetActive(false);
     }
 
     public void SelectMode1v1()
@@ -55,6 +66,7 @@ public class MainMenuManager : MonoBehaviour
         mainPanel.SetActive(false);
         modePanel.SetActive(false);
         bulletSelectPanel.SetActive(true);
+        optionsPanel.SetActive(false);
 
         if (selectHeaderText != null)
             selectHeaderText.text = $"Gracz {currentSelectingPlayer} — wybierz typ pocisku";

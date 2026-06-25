@@ -32,15 +32,18 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
-        rb.linearDamping = linearDrag;
-
-        if (trailRenderer == null)
-            trailRenderer = GetComponent<TrailRenderer>();
 
         if (playerNumber == 1)
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         else
             transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+
+        // Wczytaj opcje
+        if (GameOptions.Instance != null)
+        {
+            moveSpeed = GameOptions.Instance.tankSpeed;
+            rotateSpeed = GameOptions.Instance.tankRotateSpeed;
+        }
     }
 
     void Update()
