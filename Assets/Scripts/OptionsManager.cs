@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
+using System.Collections.Generic;
 public class OptionsManager : MonoBehaviour
 {
     [Header("Panel")]
@@ -13,6 +13,16 @@ public class OptionsManager : MonoBehaviour
     public TextMeshProUGUI timeValueText;
     public TextMeshProUGUI tankSpeedValueText;
     public TextMeshProUGUI rotationSpeedValueText;
+
+    [Header("Dash Settings")]
+    public TextMeshProUGUI dashCooldownText;
+    public TextMeshProUGUI dashForceText;
+    public TextMeshProUGUI dashDurationText;
+
+    [Header("Bonus Spawner")]
+    public TextMeshProUGUI minSpawnIntervalText;
+    public TextMeshProUGUI maxSpawnIntervalText;
+    public TextMeshProUGUI maxBonusesText;
 
     [Header("Explosive")]
     public TextMeshProUGUI expSpeedText;
@@ -35,6 +45,16 @@ public class OptionsManager : MonoBehaviour
     private float tankSpeed;
     private float rotationSpeed;
 
+    // NOWE: Dash
+    private float dashCooldown;
+    private float dashForce;
+    private float dashDuration;
+
+    // NOWE: Bonus Spawner
+    private float minSpawnInterval;
+    private float maxSpawnInterval;
+    private int maxBonusesOnMap;
+
     private float expSpeed;
     private float expCooldown;
     private float expRadius;
@@ -52,6 +72,14 @@ public class OptionsManager : MonoBehaviour
     private const int timeStep = 10;
     private const float speedStep = 0.5f;
     private const float rotStep = 10f;
+    
+    // NOWE: Kroki regulacji
+    private const float dashCooldownStep = 0.2f;
+    private const float dashForceStep = 1.0f;
+    private const float dashDurationStep = 0.05f;
+    private const float spawnIntervalStep = 0.5f;
+    private const int maxBonusesStep = 1;
+
     private const float bulletSpeedStep = 0.5f;
     private const float cooldownStep = 0.1f;
     private const float radiusStep = 0.5f;
@@ -73,6 +101,14 @@ public class OptionsManager : MonoBehaviour
         tankSpeed     = GameOptions.Instance.tankSpeed;
         rotationSpeed = GameOptions.Instance.tankRotateSpeed;
 
+        // NOWE: Pobieranie z GameOptions (Upewnij się, że te zmienne istnieją w GameOptions)
+        dashCooldown     = GameOptions.Instance.dashCooldown;
+        dashForce        = GameOptions.Instance.dashForce;
+        dashDuration     = GameOptions.Instance.dashDuration;
+        minSpawnInterval = GameOptions.Instance.minSpawnInterval;
+        maxSpawnInterval = GameOptions.Instance.maxSpawnInterval;
+        maxBonusesOnMap  = GameOptions.Instance.maxBonusesOnMap;
+
         expSpeed    = GameOptions.Instance.explosiveSpeed;
         expCooldown = GameOptions.Instance.explosiveCooldown;
         expRadius   = GameOptions.Instance.explosiveRadius;
@@ -88,10 +124,18 @@ public class OptionsManager : MonoBehaviour
 
     private void RefreshUI()
     {
-        if (scoreValueText)    scoreValueText.text    = scoreToWin.ToString();
-        if (timeValueText)     timeValueText.text     = roundDuration.ToString();
-        if (tankSpeedValueText) tankSpeedValueText.text = tankSpeed.ToString("F1");
+        if (scoreValueText)         scoreValueText.text         = scoreToWin.ToString();
+        if (timeValueText)          timeValueText.text          = roundDuration.ToString();
+        if (tankSpeedValueText)     tankSpeedValueText.text     = tankSpeed.ToString("F1");
         if (rotationSpeedValueText) rotationSpeedValueText.text = rotationSpeed.ToString("F0");
+
+        // NOWE: Aktualizacja tekstu w UI
+        if (dashCooldownText)       dashCooldownText.text       = dashCooldown.ToString("F1") + "s";
+        if (dashForceText)          dashForceText.text          = dashForce.ToString("F0");
+        if (dashDurationText)       dashDurationText.text       = dashDuration.ToString("F2") + "s";
+        if (minSpawnIntervalText)   minSpawnIntervalText.text   = minSpawnInterval.ToString("F1") + "s";
+        if (maxSpawnIntervalText)   maxSpawnIntervalText.text   = maxSpawnInterval.ToString("F1") + "s";
+        if (maxBonusesText)         maxBonusesText.text         = maxBonusesOnMap.ToString();
 
         if (expSpeedText)    expSpeedText.text    = expSpeed.ToString("F1");
         if (expCooldownText) expCooldownText.text = expCooldown.ToString("F1");
@@ -115,6 +159,43 @@ public class OptionsManager : MonoBehaviour
     public void TankSpeedPlus()   { tankSpeed = Mathf.Min(20f, tankSpeed + speedStep); RefreshUI(); }
     public void RotSpeedMinus()   { rotationSpeed = Mathf.Max(10f, rotationSpeed - rotStep); RefreshUI(); }
     public void RotSpeedPlus()    { rotationSpeed = Mathf.Min(360f, rotationSpeed + rotStep); RefreshUI(); }
+
+    // ─── NOWE: Dash Settings ──────────────────────────────────────
+    public void DashCooldownMinus() { dashCooldown = Mathf.Max(0.2f, dashCooldown - dashCooldownStep); RefreshUI(); }
+    public void DashCooldownPlus()  { dashCooldown = Mathf.Min(10f, dashCooldown + dashCooldownStep); RefreshUI(); }
+    public void DashForceMinus()    { dashForce = Mathf.Max(5f, dashForce - dashForceStep); RefreshUI(); }
+    public void DashForcePlus()     { dashForce = Mathf.Min(50f, dashForce + dashForceStep); RefreshUI(); }
+    public void DashDurationMinus() { dashDuration = Mathf.Max(0.05f, dashDuration - dashDurationStep); RefreshUI(); }
+    public void DashDurationPlus()  { dashDuration = Mathf.Min(1f, dashDuration + dashDurationStep); RefreshUI(); }
+
+    // ─── NOWE: Bonus Spawner ──────────────────────────────────────
+    public void MinSpawnIntervalMinus() 
+    { 
+        minSpawnInterval = Mathf.Max(1f, minSpawnInterval - spawnIntervalStep); 
+        // Zapobieganie sytuacji, gdzie min jest większe niż max
+        if (minSpawnInterval > maxSpawnInterval) maxSpawnInterval = minSpawnInterval;
+        RefreshUI(); 
+    }
+    public void MinSpawnIntervalPlus()  
+    { 
+        minSpawnInterval = Mathf.Min(30f, minSpawnInterval + spawnIntervalStep); 
+        if (minSpawnInterval > maxSpawnInterval) maxSpawnInterval = minSpawnInterval;
+        RefreshUI(); 
+    }
+    public void MaxSpawnIntervalMinus() 
+    { 
+        maxSpawnInterval = Mathf.Max(1f, maxSpawnInterval - spawnIntervalStep); 
+        if (maxSpawnInterval < minSpawnInterval) minSpawnInterval = maxSpawnInterval;
+        RefreshUI(); 
+    }
+    public void MaxSpawnIntervalPlus()  
+    { 
+        maxSpawnInterval = Mathf.Min(60f, maxSpawnInterval + spawnIntervalStep); 
+        if (maxSpawnInterval < minSpawnInterval) minSpawnInterval = maxSpawnInterval;
+        RefreshUI(); 
+    }
+    public void MaxBonusesMinus() { maxBonusesOnMap = Mathf.Max(0, maxBonusesOnMap - maxBonusesStep); RefreshUI(); }
+    public void MaxBonusesPlus()  { maxBonusesOnMap = Mathf.Min(10, maxBonusesOnMap + maxBonusesStep); RefreshUI(); }
 
     // ─── Explosive ───────────────────────────────────────────────
     public void ExpSpeedMinus()    { expSpeed    = Mathf.Max(1f, expSpeed - bulletSpeedStep); RefreshUI(); }
@@ -149,6 +230,14 @@ public class OptionsManager : MonoBehaviour
         GameOptions.Instance.roundDuration    = roundDuration;
         GameOptions.Instance.tankSpeed        = tankSpeed;
         GameOptions.Instance.tankRotateSpeed  = rotationSpeed;
+
+        // NOWE: Zapisywanie do GameOptions
+        GameOptions.Instance.dashCooldown     = dashCooldown;
+        GameOptions.Instance.dashForce        = dashForce;
+        GameOptions.Instance.dashDuration     = dashDuration;
+        GameOptions.Instance.minSpawnInterval = minSpawnInterval;
+        GameOptions.Instance.maxSpawnInterval = maxSpawnInterval;
+        GameOptions.Instance.maxBonusesOnMap  = maxBonusesOnMap;
 
         GameOptions.Instance.explosiveSpeed    = expSpeed;
         GameOptions.Instance.explosiveCooldown = expCooldown;

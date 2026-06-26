@@ -15,8 +15,8 @@ public class BonusUI : MonoBehaviour
         if (targetTank.GetActiveBonusInfo(out string name, out float time))
         {
             // F1 oznacza zaokrąglenie do 1 miejsca po przecinku (np. 3.4s)
-            uiText.text = $"{name}\nPozostało: {time.ToString("F1")}s";
-            uiText.color = Color.yellow; // Wyróżnienie aktywnego efektu
+            uiText.text = $"{name}\nPozostalo: {time.ToString("F1")}s";
+            uiText.color = Color.blue; // Wyróżnienie aktywnego efektu
         }
         else
         {

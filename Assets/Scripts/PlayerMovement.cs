@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private float dashTimer = 0f;
     private float dashCooldownTimer = 0f;
 
-    void Start()
+void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
@@ -46,6 +46,10 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = GameOptions.Instance.tankSpeed;
             rotateSpeed = GameOptions.Instance.tankRotateSpeed;
+            
+            dashCooldown = GameOptions.Instance.dashCooldown;
+            dashForce = GameOptions.Instance.dashForce;
+            dashDuration = GameOptions.Instance.dashDuration;
         }
     }
 

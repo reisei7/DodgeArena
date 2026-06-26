@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic; // Wymagane do działania List<>
 using UnityEngine;
 
 public class BonusSpawner : MonoBehaviour
@@ -28,6 +29,14 @@ public class BonusSpawner : MonoBehaviour
 
     void Start()
     {
+        // Pobranie wartości ze statycznej instancji opcji gry na początku rundy
+        if (GameOptions.Instance != null)
+        {
+            minSpawnInterval = GameOptions.Instance.minSpawnInterval;
+            maxSpawnInterval = GameOptions.Instance.maxSpawnInterval;
+            maxBonusesOnMap  = GameOptions.Instance.maxBonusesOnMap;
+        }
+
         StartCoroutine(SpawnLoop());
     }
 
@@ -35,9 +44,11 @@ public class BonusSpawner : MonoBehaviour
     {
         while (true)
         {
+            // Dynamicznie korzystamy z przedziałów czasowych przypisanych w Start
             float waitTime = Random.Range(minSpawnInterval, maxSpawnInterval);
             yield return new WaitForSeconds(waitTime);
 
+            // Dynamicznie sprawdzamy limit maksymalnej ilości bonusów na mapie
             if (currentBonusCount < maxBonusesOnMap)
                 StartCoroutine(SpawnWithUFO());
         }
@@ -45,6 +56,33 @@ public class BonusSpawner : MonoBehaviour
 
     private IEnumerator SpawnWithUFO()
     {
+        // 1. FILTROWANIE DOZWOLONYCH BONUSÓW
+        System.Array allBonusTypes = System.Enum.GetValues(typeof(BonusType));
+        List<BonusType> allowedBonuses = new List<BonusType>();
+
+        foreach (BonusType type in allBonusTypes)
+        {
+            // Pomijamy specyficzny techniczny stan techniczny "None" lub "AirStrike" (jeśli ma osobną logikę)
+            if (type == BonusType.AirStrike) // Jeśli AirStrike ma się normalnie spawnować, zakomentuj tę linię
+                continue;
+
+            // Sprawdzamy czy bonus nie jest na liście zablokowanych w GameOptions
+            if (GameOptions.Instance != null)
+            {
+                if (GameOptions.Instance.IsBonusEnabled(type))
+                {
+                    allowedBonuses.Add(type);
+                }
+            }
+            else
+            {
+                allowedBonuses.Add(type); // Fallback jeśli nie odpalamy z poziomu menu
+            }
+        }
+
+        // Jeśli gracz wyłączył ABSOLUTNIE WSZYSTKIE bonusy w menu, UFO nie przyleci
+        if (allowedBonuses.Count == 0) yield break;
+
         // Losowe miejsce na mapie
         Vector2 spawnPos = new Vector2(
             Random.Range(mapMin.x, mapMax.x),
@@ -56,12 +94,12 @@ public class BonusSpawner : MonoBehaviour
         Vector3 ufoTargetPos = new Vector3(spawnPos.x, spawnPos.y + 2f, 0f);
 
         GameObject ufo = null;
-        Animator ufoAnimator = null; // <-- Nowa zmienna na animator UFO
+        Animator ufoAnimator = null;
 
         if (ufoPrefab != null)
         {
             ufo = Instantiate(ufoPrefab, ufoStartPos, Quaternion.identity);
-            ufoAnimator = ufo.GetComponent<Animator>(); // <-- Pobieramy animator z wyrenderowanego UFO
+            ufoAnimator = ufo.GetComponent<Animator>();
 
             // Animacja lotu UFO w dół
             float elapsed = 0f;
@@ -79,15 +117,13 @@ public class BonusSpawner : MonoBehaviour
         // ================================================================
         if (ufoAnimator != null)
         {
-            ufoAnimator.SetTrigger("Shoot"); // <-- Odpala Twoją animację (laserpink1 -> 2 -> 3)
+            ufoAnimator.SetTrigger("Shoot");
         }
 
-        // Czekamy chwilę, żeby animacja lasera zdążyła się wyświetlić na ekranie 
-        // zanim zrzucimy paczkę i zanim UFO odleci (np. 0.6 sekundy)
         yield return new WaitForSeconds(0.6f);
 
-        // Losuj typ bonusu
-        BonusType randomType = (BonusType)Random.Range(0, System.Enum.GetValues(typeof(BonusType)).Length);
+        // 2. LOSOWANIE TYLKO Z DOZWOLONYCH TYPÓW
+        BonusType randomType = allowedBonuses[Random.Range(0, allowedBonuses.Count)];
 
         // Stwórz pickup
         if (bonusPickupPrefab != null)
@@ -106,7 +142,6 @@ public class BonusSpawner : MonoBehaviour
             StartCoroutine(DecrementCountAfter(20f));
         }
 
-        // Dajemy jeszcze moment, żeby laser ładnie zgasł i przeszedł do trybu lotu
         yield return new WaitForSeconds(0.2f);
 
         // UFO odlatuje w górę
