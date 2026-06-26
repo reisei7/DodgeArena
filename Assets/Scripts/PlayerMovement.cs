@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     public TrailRenderer trailRenderer;
 
     private Rigidbody2D rb;
+    private BonusEffect bonusEffect;
     private float moveInput;
     private float rotateInput;
 
@@ -32,13 +33,15 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0f;
         rb.freezeRotation = true;
+        rb.linearDamping = linearDrag;
+
+        bonusEffect = GetComponent<BonusEffect>();
 
         if (playerNumber == 1)
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         else
             transform.rotation = Quaternion.Euler(0f, 0f, -90f);
 
-        // Wczytaj opcje
         if (GameOptions.Instance != null)
         {
             moveSpeed = GameOptions.Instance.tankSpeed;
@@ -48,28 +51,59 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        // Ogłuszenie — blokuje cały input
+        if (bonusEffect != null && bonusEffect.isStunned)
+        {
+            moveInput = 0f;
+            rotateInput = 0f;
+            UpdateTrail();
+            return;
+        }
+
+        // Wymuszony ruch do przodu — blokuje input gracza
+        if (bonusEffect != null && bonusEffect.forcedForward)
+        {
+            moveInput = 1f;
+            rotateInput = 0f;
+            UpdateTrail();
+            return;
+        }
+
         var keyboard = Keyboard.current;
         if (keyboard == null) return;
 
         moveInput = 0f;
         rotateInput = 0f;
 
+        // Odwrócone sterowanie
+        float rev = (bonusEffect != null && bonusEffect.controlsReversed) ? -1f : 1f;
+        // Blokada skrętu
+        bool canRotate = bonusEffect == null || !bonusEffect.noRotation;
+
         if (playerNumber == 1)
         {
-            if (keyboard.wKey.isPressed) moveInput = 1f;
-            if (keyboard.sKey.isPressed) moveInput = -1f;
-            if (keyboard.aKey.isPressed) rotateInput = 1f;
-            if (keyboard.dKey.isPressed) rotateInput = -1f;
+            if (keyboard.wKey.isPressed) moveInput =  1f * rev;
+            if (keyboard.sKey.isPressed) moveInput = -1f * rev;
+
+            if (canRotate)
+            {
+                if (keyboard.aKey.isPressed) rotateInput =  1f * rev;
+                if (keyboard.dKey.isPressed) rotateInput = -1f * rev;
+            }
 
             if (keyboard.leftShiftKey.wasPressedThisFrame && CanDash())
                 StartDash();
         }
         else if (playerNumber == 2)
         {
-            if (keyboard.upArrowKey.isPressed) moveInput = 1f;
-            if (keyboard.downArrowKey.isPressed) moveInput = -1f;
-            if (keyboard.leftArrowKey.isPressed) rotateInput = 1f;
-            if (keyboard.rightArrowKey.isPressed) rotateInput = -1f;
+            if (keyboard.upArrowKey.isPressed)   moveInput =  1f * rev;
+            if (keyboard.downArrowKey.isPressed) moveInput = -1f * rev;
+
+            if (canRotate)
+            {
+                if (keyboard.leftArrowKey.isPressed)  rotateInput =  1f * rev;
+                if (keyboard.rightArrowKey.isPressed) rotateInput = -1f * rev;
+            }
 
             if (keyboard.rightCtrlKey.wasPressedThisFrame && CanDash())
                 StartDash();
@@ -114,8 +148,7 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateTrail()
     {
         if (trailRenderer == null) return;
-        bool shouldEmit = moveInput > 0.3f || isDashing;
-        trailRenderer.emitting = shouldEmit;
+        trailRenderer.emitting = moveInput > 0.3f || isDashing;
     }
 
     private System.Collections.IEnumerator DashVisualEffect()
@@ -128,7 +161,6 @@ public class PlayerMovement : MonoBehaviour
         transform.localScale = originalScale;
     }
 
-    // Dla TankTreadMarks
     public Vector2 GetMoveInput() => new Vector2(rotateInput, moveInput);
     public bool IsDashing() => isDashing;
 }

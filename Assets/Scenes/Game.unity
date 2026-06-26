@@ -5983,6 +5983,57 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.48, y: 0.48}
   m_EdgeRadius: 0
+--- !u!1 &398944783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398944785}
+  - component: {fileID: 398944784}
+  m_Layer: 0
+  m_Name: BonusSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &398944784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398944783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da03dcad7fb40e4b8bcef8cf0d22bec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusSpawner
+  ufoPrefab: {fileID: 6944803098088860552, guid: f14ebc476cd0eac44a10a2b9e89014dc, type: 3}
+  bonusPickupPrefab: {fileID: 5615480685851457572, guid: 0710ced04f1c22841b8ccf38a69af7b9, type: 3}
+  minSpawnInterval: 4
+  maxSpawnInterval: 8
+  maxBonusesOnMap: 99
+  mapMin: {x: -14.2995, y: -8.4405}
+  mapMax: {x: 16.12999, y: 8.207106}
+--- !u!4 &398944785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398944783}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &404646163
 GameObject:
   m_ObjectHideFlags: 0
@@ -37487,6 +37538,7 @@ GameObject:
   - component: {fileID: 1347956751}
   - component: {fileID: 1347956753}
   - component: {fileID: 1347956754}
+  - component: {fileID: 1347956755}
   m_Layer: 0
   m_Name: gracz2
   m_TagString: Player
@@ -37828,6 +37880,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankTreadMarks
   spawnInterval: 0.14
   offsetBehind: 0.65
+--- !u!114 &1347956755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347956745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58e0aa2d9cfa64ea4b7cc846aeb014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusEffect
+  hasShield: 0
+  isSlowed: 0
+  isSpeedBoosted: 0
+  bulletsThroughWalls: 0
+  controlsReversed: 0
+  noRotation: 0
+  forcedForward: 0
+  isStunned: 0
 --- !u!1 &1357204958
 GameObject:
   m_ObjectHideFlags: 0
@@ -40861,6 +40933,57 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.72, y: 0.72}
   m_EdgeRadius: 0
+--- !u!1 &1618435620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618435622}
+  - component: {fileID: 1618435621}
+  m_Layer: 0
+  m_Name: AirStrikeManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1618435621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618435620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bec9eb575747f549896e61332eb67b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AirStrikeManager
+  bombWarningPrefab: {fileID: 5131330741370217143, guid: 10a57a1ac350c9141b44af28ecaf01e5, type: 3}
+  bombExplosionPrefab: {fileID: 4004406171943630301, guid: e9b1f257b79053b47b03df4ba031d2f9, type: 3}
+  bombCount: 3
+  bombRadius: 1.5
+  stunDuration: 1.5
+  warningDuration: 2
+  spreadRadius: 4
+--- !u!4 &1618435622
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618435620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1651287356
 GameObject:
   m_ObjectHideFlags: 0
@@ -45654,6 +45777,7 @@ GameObject:
   - component: {fileID: 2121385481}
   - component: {fileID: 2121385483}
   - component: {fileID: 2121385484}
+  - component: {fileID: 2121385485}
   m_Layer: 0
   m_Name: gracz1
   m_TagString: Player
@@ -45996,6 +46120,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TankTreadMarks
   spawnInterval: 0.14
   offsetBehind: 0.65
+--- !u!114 &2121385485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121385475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d58e0aa2d9cfa64ea4b7cc846aeb014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BonusEffect
+  hasShield: 0
+  isSlowed: 0
+  isSpeedBoosted: 0
+  bulletsThroughWalls: 0
+  controlsReversed: 0
+  noRotation: 0
+  forcedForward: 0
+  isStunned: 0
 --- !u!1 &2129650135
 GameObject:
   m_ObjectHideFlags: 0
@@ -46422,3 +46566,5 @@ SceneRoots:
   - {fileID: 1357204960}
   - {fileID: 47985773}
   - {fileID: 2025676222}
+  - {fileID: 398944785}
+  - {fileID: 1618435622}

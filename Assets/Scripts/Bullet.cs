@@ -122,17 +122,35 @@ public class Bullet : MonoBehaviour
         target = closest;
     }
 
+    private GameObject GetOwnerPlayer()
+    {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (var p in players)
+        {
+            PlayerScore ps = p.GetComponent<PlayerScore>();
+            if (ps != null && ps.playerNumber == ownerPlayerNumber)
+                return p;
+        }
+        return null;
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (isDying) return;
 
         if (other.CompareTag("Wall"))
         {
-            if (bulletType == BulletType.Ricochet && bounceCount < maxBounces)
+            // Sprawdź czy właściciel ma efekt bulletsThroughWalls
+            GameObject owner = GetOwnerPlayer();
+            if (owner != null)
             {
-                Bounce(other);
-                return;
+                BonusEffect be = owner.GetComponent<BonusEffect>();
+                if (be != null && be.bulletsThroughWalls)
+                    return; // Przeleć przez ścianę!
             }
+
+            if (bulletType == BulletType.Ricochet && bounceCount < maxBounces)
+            { Bounce(other); return; }
             HandleHit(transform.position);
             return;
         }
