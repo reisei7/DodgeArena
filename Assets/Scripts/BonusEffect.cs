@@ -270,10 +270,10 @@ public class BonusEffect : MonoBehaviour
         {
             case BonusType.Shield: return "Tarcza ochronna";
             case BonusType.SlowEnemy: return "Spowolnienie";
-            case BonusType.SpeedBoost: return "Super prędkość";
-            case BonusType.BulletsThroughWalls: return "Przenikanie pocisków";
+            case BonusType.SpeedBoost: return "PRZYSPIESZENIE";
+            case BonusType.BulletsThroughWalls: return "Pociski duchy";
             case BonusType.NegativeRandom:
-                if (controlsReversed) return "Odwrócone sterowanie";
+                if (controlsReversed) return "Odwrocone sterowanie";
                 if (noRotation) return "Blokada obrotu";
                 if (forcedForward) return "Przymusowy ruch";
                 return "Pechowy los";

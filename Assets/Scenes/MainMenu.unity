@@ -1009,7 +1009,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: S
+  m_text: 'Ruch w tyl: S'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -2078,7 +2078,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Strzalka w gore
+  m_text: "RUCH DO PRZODU: \u25B2 "
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -9261,9 +9261,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Strzalka w lewo
-
-'
+  m_text: "ruch w lewo: \u25C4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -9759,7 +9757,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A
+  m_text: 'Ruch w lewo: A'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -10504,7 +10502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Gracz VS. GRACZ\n\t(LAN)\t  "
+  m_text: Gracz VS. GRACZ
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -10705,15 +10703,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_sharedMaterial
@@ -10797,15 +10795,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontSizeBase
@@ -10887,9 +10885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Strzalka w dol
-
-'
+  m_text: "Ruch do tylu: \u25BC"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -14977,7 +14973,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SPACE
+  m_text: 'strzal: SPACE'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -15311,7 +15307,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: SHIFT
+  m_text: 'dash: SHIFT'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -15523,7 +15519,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: L. ALT
+  m_text: 'dash: L. ALT'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -17667,7 +17663,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'W '
+  m_text: 'RUCH DO PRZODU: W '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -18681,15 +18677,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_sharedMaterial
@@ -18769,15 +18765,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontSizeBase
@@ -19305,9 +19301,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Strzalka w prawo
-
-'
+  m_text: "ruch w prawo: \u25BA\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -24028,7 +24022,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: P
+  m_text: 'strzal: P'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
@@ -27991,7 +27985,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -29010,15 +29004,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5707367231248992728, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_sharedMaterial
@@ -29102,15 +29096,15 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontColor.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9187593271525621640, guid: 38182578b54fb40428806b58e6a9ece6, type: 3}
       propertyPath: m_fontSizeBase
@@ -29297,7 +29291,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: D
+  m_text: 'Ruch w prawo: D'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
   m_sharedMaterial: {fileID: -7120041445543256894, guid: 2d73edb760fd2bc44844f7e06757be83, type: 2}
